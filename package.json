@@ -1,6 +1,6 @@
 {
-  "name": "@gusok/react-style-proxy",
-  "version": "0.1.0",
+  "name": "@cozka/react-style-proxy",
+  "version": "0.2.0",
   "keywords": [
     "react",
     "emotion",
@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mitsuhiroseino/gusok-react-style-proxy.git"
+    "url": "https://github.com/mitsuhiroseino/cozka-react-style-proxy.git"
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",
@@ -28,9 +28,9 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.21.4",
+    "@cozka/rollup-create-dist-packagejson": "^0.7.0",
+    "@cozka/utils-niche-types": "^0.2.0",
     "@eslint/js": "^9.3.0",
-    "@gusok/rollup-create-dist-packagejson": "^0.6.6",
-    "@gusok/utils-niche-types": "^0.1.0",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.2",

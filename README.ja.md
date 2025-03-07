@@ -1,6 +1,6 @@
-# @gusok/react-style-proxy
+# @cozka/react-style-proxy
 
-`@gusok/react-style-proxy` は、コンポーネントのスタイル関連のプロパティを、  
+`@cozka/react-style-proxy` は、コンポーネントのスタイル関連のプロパティを、  
 [React](https://react.dev/)標準の`style`や[Emotion](https://emotion.sh/docs/introduction)の`css`等のプロパティへ反映する機能を提供するパッケージです。
 
 **[English README is available here](./README.md)**
@@ -8,7 +8,7 @@
 ## インストール
 
 ```sh
-npm install @gusok/react-style-proxy
+npm install @cozka/react-style-proxy
 ```
 
 ## 使い方
@@ -16,7 +16,7 @@ npm install @gusok/react-style-proxy
 スタイル関連のプロパティを `style`、`css`、`sx` などに適用します。
 
 ```tsx
-import proxyStyle from '@gusok/react-style-proxy';
+import proxyStyle from '@cozka/react-style-proxy';
 
 const props = {
   style: {

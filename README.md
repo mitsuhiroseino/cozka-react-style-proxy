@@ -1,13 +1,13 @@
-# @gusok/react-style-proxy
+# @cozka/react-style-proxy
 
-`@gusok/react-style-proxy` is a package that applies style-related properties of a component to standard React `style`, [Emotion](https://emotion.sh/docs/introduction) `css`, or other similar properties.
+`@cozka/react-style-proxy` is a package that applies style-related properties of a component to standard React `style`, [Emotion](https://emotion.sh/docs/introduction) `css`, or other similar properties.
 
 **[日本語のREADMEはこちら](./README.ja.md)**
 
 ## Installation
 
 ```sh
-npm install @gusok/react-style-proxy
+npm install @cozka/react-style-proxy
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install @gusok/react-style-proxy
 This package applies style-related properties to `style`, `css`, `sx`, etc.
 
 ```tsx
-import proxyStyle from '@gusok/react-style-proxy';
+import proxyStyle from '@cozka/react-style-proxy';
 
 const props = {
   style: {
