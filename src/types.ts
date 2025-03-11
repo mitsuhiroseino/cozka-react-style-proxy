@@ -18,4 +18,12 @@ export type StyleProxyOptions = {
    * デフォルトは`merge`
    */
   styleApplyMode?: 'merge' | 'append';
+
+  /**
+   * 反映するプロパティが`styleProps`に既にあった場合の動作
+   *
+   * - `true`: 反映するプロパティを優先する
+   * - `false`: 既存のプロパティを優先する
+   */
+  stylePriority?: boolean;
 };
