@@ -330,4 +330,160 @@ describe('styleProxy', () => {
       });
     });
   });
+
+  describe('stylePriority', () => {
+    test('true & styleApplyMod=`merge`', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+            backgroundColor: '#ffffff',
+          },
+        },
+        style,
+        { styleApplyMode: 'merge', stylePriority: true },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          color: '#ff0000',
+          backgroundColor: '#00ff00',
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('false & styleApplyMod=`merge`', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+            backgroundColor: '#ffffff',
+          },
+        },
+        style,
+        { styleApplyMode: 'merge', stylePriority: false },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          color: '#ff0000',
+          backgroundColor: '#ffffff',
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('true & styleApplyMod=`append` & object', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        style,
+        { styleApplyMode: 'append', stylePriority: true },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: [
+          {
+            borderColor: '#0000ff',
+          },
+          {
+            color: '#ff0000',
+            backgroundColor: '#00ff00',
+          },
+        ],
+      });
+    });
+
+    test('false & styleApplyMod=`append` & object', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        style,
+        { styleApplyMode: 'append', stylePriority: false },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: [
+          {
+            color: '#ff0000',
+            backgroundColor: '#00ff00',
+          },
+          {
+            borderColor: '#0000ff',
+          },
+        ],
+      });
+    });
+
+    test('true & styleApplyMod=`append` & array', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: [
+            {
+              borderColor: '#0000ff',
+            },
+          ],
+        },
+        style,
+        { styleApplyMode: 'append', stylePriority: true },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: [
+          {
+            borderColor: '#0000ff',
+          },
+          {
+            color: '#ff0000',
+            backgroundColor: '#00ff00',
+          },
+        ],
+      });
+    });
+
+    test('false & styleApplyMod=`append` & array', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: [
+            {
+              borderColor: '#0000ff',
+            },
+          ],
+        },
+        style,
+        { styleApplyMode: 'append', stylePriority: false },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: [
+          {
+            color: '#ff0000',
+            backgroundColor: '#00ff00',
+          },
+          {
+            borderColor: '#0000ff',
+          },
+        ],
+      });
+    });
+  });
 });

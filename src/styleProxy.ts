@@ -41,13 +41,13 @@ export default function styleProxy<P = {}, S = CSSProperties>(
 
       if (Array.isArray(orgStyle)) {
         // 配列の場合
-        append([srcStyle], orgStyle);
+        resultProps[styleProp] = append([srcStyle], orgStyle);
       } else if (
         Object.prototype.toString.call(orgStyle) === '[object Object]'
       ) {
         if (styleApplyMode === 'append') {
           // オブジェクトで'append'の場合
-          append([srcStyle], [orgStyle]);
+          resultProps[styleProp] = append([srcStyle], [orgStyle]);
         } else {
           // オブジェクトで'append'以外の場合
           for (const key in orgStyle) {
