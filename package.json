@@ -13,6 +13,18 @@
   "license": "MIT",
   "author": "Mitsuhiro Seino",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.js",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./*": {
+      "types": "./dist/*/index.d.js",
+      "import": "./dist/*/index.js",
+      "require": "./dist/cjs/*/index.cjs"
+    }
+  },
   "scripts": {
     "build": "rimraf dist && rollup --config",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
@@ -45,8 +57,8 @@
     "@types/lodash": "^4.14.195",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^20.2.5",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "babel-jest": "^29.7.0",
     "clean-css": "^5.3.3",
     "eslint": "^9.24.0",
@@ -61,7 +73,7 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "rimraf": "^3.0.2",
-    "rollup": "^4.39.0",
+    "rollup": "^4.40.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-sass": "^1.15.2",
     "ts-jest": "^29.1.0",
