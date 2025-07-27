@@ -16,8 +16,7 @@ const EXTENTION_CJS = '.cjs';
 const EXTERNAL = [/[\\/]node_modules[\\/]/, /[\\/]dist[\\/]/];
 const OUTPUT = './dist';
 const OUTPUT_ESM = OUTPUT;
-const OUTPUT_CJS_DIR = 'cjs';
-const OUTPUT_CJS = path.join(OUTPUT, OUTPUT_CJS_DIR);
+const OUTPUT_CJS = path.join(OUTPUT, 'cjs');
 const BABEL_CONFIG_PATH = path.resolve('babel.config.js');
 const TSCONFIG_PATH = path.resolve('tsconfig.json');
 
@@ -29,7 +28,7 @@ const options = [
     plugins: [
       packagejson({
         content: {
-          main: `${OUTPUT_CJS_DIR}/index${EXTENTION_CJS}`,
+          main: `cjs/index${EXTENTION_CJS}`,
           module: `index${EXTENTION_ESM}`,
           types: 'index.d.ts',
           files: ['**/*'],
