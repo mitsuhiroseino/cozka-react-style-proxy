@@ -9,21 +9,37 @@ import { StyleProxyOptions } from './types';
  * @param options オプション
  * @returns
  */
-export default function styleProxy<P = {}, S = CSSProperties>(
+export default function styleProxy<P = {}, S = CSSProperties | CSSProperties[]>(
+  props: P,
+  style: S,
+  options: StyleProxyOptions = {},
+): P {
+  if (Array.isArray(style)) {
+    return style.reduce(
+      (result, stl) => {
+        return _styleProxy(result, stl, options);
+      },
+      { ...props },
+    );
+  } else {
+    return _styleProxy({ ...props }, style, options);
+  }
+}
+
+function _styleProxy<P = {}, S = CSSProperties>(
   props: P,
   style: S,
   options: StyleProxyOptions = {},
 ) {
   const { styleProp = 'style', styleApplyMode, stylePriority } = options;
-  const resultProps = { ...props };
 
   if (style && Object.keys(style).length) {
     const srcStyle = { ...style };
     // style関連のプロパティがある場合のみ処理
-    const orgStyle = resultProps[styleProp];
+    const orgStyle = props[styleProp];
     if (!orgStyle) {
       // 未設定の場合はそのまま設定
-      resultProps[styleProp] = srcStyle;
+      props[styleProp] = srcStyle;
     } else {
       let append;
       let shouldMerge;
@@ -41,13 +57,13 @@ export default function styleProxy<P = {}, S = CSSProperties>(
 
       if (Array.isArray(orgStyle)) {
         // 配列の場合
-        resultProps[styleProp] = append([srcStyle], orgStyle);
+        props[styleProp] = append([srcStyle], orgStyle);
       } else if (
         Object.prototype.toString.call(orgStyle) === '[object Object]'
       ) {
         if (styleApplyMode === 'append') {
           // オブジェクトで'append'の場合
-          resultProps[styleProp] = append([srcStyle], [orgStyle]);
+          props[styleProp] = append([srcStyle], [orgStyle]);
         } else {
           // オブジェクトで'append'以外の場合
           for (const key in orgStyle) {
@@ -55,11 +71,11 @@ export default function styleProxy<P = {}, S = CSSProperties>(
               srcStyle[key] = orgStyle[key];
             }
           }
-          resultProps[styleProp] = srcStyle;
+          props[styleProp] = srcStyle;
         }
       }
     }
   }
 
-  return resultProps;
+  return props;
 }

@@ -37,6 +37,112 @@ describe('styleProxy', () => {
     });
   });
 
+  describe('style', () => {
+    test('null', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        null,
+        { styleProp: 'style' },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('object', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        style,
+        { styleProp: 'style' },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          color: '#ff0000',
+          backgroundColor: '#00ff00',
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('array', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        [{ color: '#ff0000', backgroundColor: '#00ff00' }],
+        { styleProp: 'style' },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          color: '#ff0000',
+          backgroundColor: '#00ff00',
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('empty array', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        [],
+        { styleProp: 'style' },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          borderColor: '#0000ff',
+        },
+      });
+    });
+
+    test('null array', () => {
+      const styledProps = styleProxy(
+        {
+          ...props,
+          style: {
+            borderColor: '#0000ff',
+          },
+        },
+        [null, null, null],
+        { styleProp: 'style' },
+      );
+      expect(styledProps).toEqual({
+        value: 'abc',
+        onChange,
+        style: {
+          borderColor: '#0000ff',
+        },
+      });
+    });
+  });
+
   describe('styleProp', () => {
     describe('style', () => {
       test('none', () => {

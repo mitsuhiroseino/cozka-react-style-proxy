@@ -13,7 +13,11 @@ const EXTENTIONS = ['.ts', '.tsx', '.js', '.jsx'];
 const EXTENTION_ESM = '.js';
 const EXTENTION_CJS = '.cjs';
 // node_modules配下のdependenciesはバンドルしない。下記の正規表現の指定をするためには'@rollup/plugin-node-resolve'が必要
-const EXTERNAL = [/[\\/]node_modules[\\/]/, /[\\/]dist[\\/]/];
+const EXTERNAL = [
+  /[\\/]node_modules[\\/]/,
+  /[\\/]dist[\\/]/,
+  /[\\/]cozka-(?!react-style-proxy).*[\\/]/,
+];
 const OUTPUT = './dist';
 const OUTPUT_ESM = OUTPUT;
 const OUTPUT_CJS = path.join(OUTPUT, 'cjs');
@@ -28,9 +32,9 @@ const options = [
     plugins: [
       packagejson({
         content: {
-          main: `cjs/index${EXTENTION_CJS}`,
-          module: `index${EXTENTION_ESM}`,
-          types: 'index.d.ts',
+          main: './cjs/index.cjs',
+          module: './index.js',
+          types: './index.d.ts',
           files: ['**/*'],
         },
       }),
@@ -77,12 +81,16 @@ function _createOptions(input, output, format, extention, options = {}) {
       exports: 'auto',
       sourcemap: false,
       entryFileNames: `[name]${extention}`,
+      // バンドルしない(falseだとindex.jsに纏められてしまう)
+      preserveModules: true,
       interop: 'auto',
     },
     external: EXTERNAL,
     treeshake: false,
     plugins: [
-      nodeResolve(),
+      nodeResolve({
+        extensions: EXTENTIONS,
+      }),
       typescript({
         filterRoot: 'src',
         tsconfig: tsconfigPath,
